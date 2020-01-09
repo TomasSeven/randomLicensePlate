@@ -5,8 +5,9 @@
   "keywords": [],
   "main": "index.js",
   "dependencies": {
+    "react": "15.5.3",
     "react-dom": "15.5.3",
-    "react": "15.5.3"
+    "react-icons": "3.8.0"
   },
   "devDependencies": {
     "react-scripts": "1.0.0"
