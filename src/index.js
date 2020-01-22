@@ -3,8 +3,14 @@ import { render } from "react-dom";
 import * as FaIconPack from "react-icons/fa";
 import cleanreg from "./images/cleanreg.jpg";
 import Spinner from "./spinner/index";
-import spinnerKit from "react-spinkit";
+import SpinnerKit from "react-spinkit";
+import Ouroboro from "./spinner/test.js";
 import "./styles.css";
+import BabelLoading from "react-loadingg/lib/BabelLoading";
+import * as Loading from "react-loadingg/lib";
+
+//https://htmlcolorcodes.com/color-picker/
+//https://html-color-codes.info/colors-from-image/
 
 class DisplayImg extends React.Component {
   render() {
@@ -38,7 +44,21 @@ class DisplayNew extends React.Component {
   }
 }
 
-class Button extends React.Component {
+class DisplayLoading extends React.Component {
+  render() {
+    const style = {
+      float: "Left"
+    };
+
+    return (
+      <div>
+        <Loading.TouchBallLoading style={style} color="#008cba" speed="0.7" />{" "}
+      </div>
+    );
+  }
+}
+
+class App extends React.Component {
   constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);
@@ -48,12 +68,13 @@ class Button extends React.Component {
       format: "Använd nya formatet",
       random: "ABC123",
       random2: "CBA321",
-      seconds: 5,
-      secondsSet: 5,
+      seconds: 3,
+      secondsSet: 3,
       useTimer: true,
       timer: 1000,
       status: true,
-      insane: false
+      insane: false,
+      generating: false
     };
   }
 
@@ -67,6 +88,7 @@ class Button extends React.Component {
     }
     console.log("timer " + this.state.secondsSet);
   };
+
   decreaseTimer = () => {
     const timerValue = this.state.secondsSet;
     if (timerValue > 0) {
@@ -86,6 +108,7 @@ class Button extends React.Component {
         this.state.timer
     );
   };
+
   setStatus = () => {
     this.setState({ status: !this.state.status });
     console.log(this.state.status);
@@ -109,9 +132,13 @@ class Button extends React.Component {
             seconds: seconds - 1
           }));
         }
+        if (seconds === 1) {
+          this.setState({ generating: true });
+        }
+
         if (seconds === 0) {
           this.handleClick();
-          this.setState({ seconds: this.state.secondsSet });
+          this.setState({ seconds: this.state.secondsSet, generating: false });
         }
       }
     }, 1000);
@@ -213,35 +240,52 @@ class Button extends React.Component {
     return <div style={style}> </div>;
   }
 
+  LoadingTest() {
+    const { generating } = this.state.generating;
+    return (
+      <div>
+        <Loading.TouchBallLoading color="#008cba" speed="0.3" />{" "}
+      </div>
+    );
+  }
+
+  //<Spinner /> - fungerar dåligt
+  //<button
+  //              className="btn btn-primary"
+  //              onClick={this.handleClick.bind(this)}
+  //            >
+  //              <FaIconPack.FaMinusSquare />
+  //            </button>
+
   render() {
     const { seconds } = this.state;
+    const { loadingStyle } = "width: 50px";
     return (
       <div className="row">
         <div className="col-12">
           <h1 className="text-center">Skapa svenska regnumber</h1>
           <div>
             <div>
-              <button
-                className="btn btn-primary"
-                onClick={this.handleClick.bind(this)}
-              >
-                <Spinner />
-              </button>
-              <div>
-                <spinnerKit />
-              </div>
+              <div />
             </div>
             <div>
-              <div>
-                {seconds === 0 ? (
-                  <h3>Skapar regnummer</h3>
-                ) : (
-                  <h3>
-                    Nytt regnummer om: {seconds < 10 ? `0${seconds}` : seconds}{" "}
-                    sek
-                  </h3>
+              <div className="divtest">
+                <div className="container-left"> Nytt regnummer om: </div>
+                {seconds > 10 && (
+                  <div className="container-right">
+                    {seconds < 10 ? `0${seconds}` : seconds} sek
+                  </div>
+                )}
+                {seconds >= 0 && (
+                  <div className="container-right">
+                    {" "}
+                    {(this.state.generating || !this.state.generating) && (
+                      <DisplayLoading />
+                    )}
+                  </div>
                 )}
               </div>
+              <div className="container-2" />
             </div>
           </div>
           <hr className="hr" />
@@ -259,9 +303,10 @@ class Button extends React.Component {
           </div>
         </div>
 
-        <div>
+        <div className="settings">
           <hr className="hr" />
           <span>Inställningar</span>
+
           <div className="set-timer">
             <span>Tid mellan nya regnummer</span>
             <button
@@ -310,4 +355,54 @@ class Button extends React.Component {
   }
 }
 
-render(<Button />, document.getElementById("container"));
+render(<App />, document.getElementById("container"));
+
+/*
+iv>
+              <div>
+                { seconds ===0 && <Loading.TouchBallLoading speed="0.5"/> }
+                {seconds >= 0 ? (
+                  <h3>Skapar regnummer</h3>
+                  
+                ) : (
+                  <h3>
+                    Nytt regnummer om: {seconds < 10 ? `0${seconds}` : seconds}{" "}
+                    sek
+                  </h3>
+                )}
+              </div>
+ <Loading.NineCellLoading />
+<Loading.BabelLoading />
+<Loading.BlockLoading />
+<Loading.BlockReserveLoading />
+<Loading.BoxLoading />
+<Loading.CircleLoading />
+<Loading.CircleToBlockLoading />
+--<Loading.CommonLoading />
+--<Loading.DisappearedLoading />
+<Loading.LoopCircleLoading />
+<Loading.NineCellLoading />
+---<Loading.TouchBallLoading />
+<Loading.TransverseLoading />
+--<Loading.WaveLoading />
+<Loading.WaveTopBottomLoading />
+<Loading.WindMillLoading />
+<Loading.JumpCircleLoading />
+<Loading.MeteorRainLoading />
+<Loading.RotateCircleLoading />
+<Loading.StickyBallLoading />
+--<Loading.SemipolarLoading />
+--<Loading.SolarSystemLoading />
+<Loading.LadderLoading />
+<Loading.HeartBoomLoading />
+--<Loading.RollBoxLoading />
+--<Loading.RectGraduallyShowLoading />
+<Loading.PointSpreadLoading />
+<Loading.ThreeHorseLoading />
+<Loading.PassThrouthLoading />
+<Loading.CoffeeLoading />
+<Loading.BatteryLoading />
+<Loading.DiamonLoading />
+<Loading.EatLoading />
+
+*/

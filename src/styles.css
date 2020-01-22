@@ -1,5 +1,7 @@
+@import url("https://fonts.googleapis.com/css?family=Rubik:400");
+
 .App {
-  font-family: sans-serif;
+  font-family: "Rubik", sans-serif;
   text-align: center;
 }
 
@@ -30,15 +32,73 @@
 }
 
 .container {
+  font-family: "Rubik", sans-serif;
   position: relative;
   text-align: center;
+  line-height: 10px;
   color: black;
+}
+
+.container-2 {
+  font-family: "Rubik", sans-serif;
+  position: relative;
+  text-align: right;
+  line-height: 10px;
+  padding-left: 30px;
+  margin-right: 500px;
+  color: black;
+  clear: both;
+}
+
+.divtest {
+  display: flex;
+  flex-direction: row;
+  font-family: "Rubik", sans-serif;
+  color: black;
+}
+
+.container-left {
+  display: flex;
+  flex-direction: row;
+  font-family: "Rubik", sans-serif;
+  position: relative;
+  text-align: right;
+  line-height: 10px;
+  width: 50%;
+  float: left;
+  color: black;
+}
+
+.container-right {
+  display: flex;
+  flex-direction: row;
+  font-family: "Rubik", sans-serif;
+  position: relative;
+  text-align: left;
+  line-height: 10px;
+  width: 50%;
+  color: black;
+  float: left;
+}
+
+.settingsa {
+  font-family: "Rubik", sans-serif;
+  position: center;
+  text-align: center;
+  line-height: 10px;
+  color: black;
+}
+
+.settings {
+  margin: 0;
+  position: absolute;
+  top: 100%;
 }
 
 .centered {
   position: absolute;
   top: 50%;
-  left: 50%;
+  left: 53%;
   transform: translate(-50%, -55%);
   font-size: 150px;
 }
@@ -51,6 +111,7 @@
   background-color: transparent;
   border: none;
   font-size: 20px;
+  color: #0f65ae;
 }
 .timerButton:hover {
   -webkit-transition: 0.2s linear;
@@ -59,7 +120,7 @@
   -o-transition: 0.2s linear;
   transition: 0.2s linear;
   transform: scale(1.3);
-  color: green;
+  color: #0b4c78;
   cursor: pointer;
 }
 
@@ -71,7 +132,7 @@
   outline: 0;
 }
 
-hr {
+.hr {
   display: block;
   height: 1px;
   border: 0;
